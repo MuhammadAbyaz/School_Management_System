@@ -27,7 +27,7 @@ public class Admin {
         System.out.println("Enter admin address: ");
         String address = scanner.next();
         employeeId = (int) (Math.random() * 100000);
-        System.out.println("Admin\n's employee id is: " + employeeId);
+        System.out.println("Admin's employee id is: " + employeeId);
         this.name = name;
         this.address = address;
     }

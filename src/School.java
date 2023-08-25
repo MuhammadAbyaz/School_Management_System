@@ -8,8 +8,9 @@ public class School {
     private String address;
 
     private ArrayList<Teacher> teacherList;
+
+
     private ArrayList<Student> studentList;
-    private ArrayList<Grades> gradeList;
 
     private final ArrayList<Admin> adminList;
 
@@ -19,7 +20,6 @@ public class School {
         this.address = "North Nazimabad";
         this.teacherList = new ArrayList<Teacher>();
         this.studentList = new ArrayList<Student>();
-        this.gradeList = new ArrayList<Grades>();
         this.adminList = new ArrayList<Admin>();
     }
 
@@ -86,20 +86,21 @@ public class School {
     }
 
     public void viewTeacherProfile() {
+        Teacher teacherToGet = null;
         System.out.println("Enter your employee id: ");
         int id = scanner.nextInt();
-        Teacher teacherToGet = null;
-        for (Teacher teacher :
-                teacherList) {
+        for (Teacher teacher : teacherList) {
             if (teacher.getEmployeeId() == id) {
                 teacherToGet = teacher;
             }
-            if (teacherToGet != null) {
-                System.out.println("NAME: " + teacherToGet.getName());
-                System.out.println("ADDRESS: " + teacherToGet.getAddress());
-                System.out.println("EMPLOYEE ID: " + teacherToGet.getEmployeeId());
-                System.out.println("SUBJECTS TO TEACH: " + Arrays.toString(teacherToGet.getSubjectsToTeach()));
-            }
+        }
+        if (teacherToGet == null) {
+            System.out.println("You have entered invalid teacher employee id !!");
+        } else {
+            System.out.println("NAME: " + teacherToGet.getName());
+            System.out.println("ADDRESS: " + teacherToGet.getAddress());
+            System.out.println("EMPLOYEE ID: " + teacherToGet.getEmployeeId());
+            System.out.println("SUBJECTS TO TEACH: " + Arrays.toString(teacherToGet.getSubjectsToTeach()));
         }
     }
 
@@ -113,7 +114,10 @@ public class School {
                 break;
             }
         }
-        if (studentToGet != null) {
+        if (studentToGet == null) {
+            System.out.println("You have entered invalid id !!");
+            viewStudentProfile();
+        } else {
             System.out.println("NAME: " + studentToGet.getName());
             System.out.println("ADDRESS: " + studentToGet.getAddress());
             System.out.println("STUDENT ID: " + studentToGet.getId());
@@ -122,7 +126,7 @@ public class School {
     }
 
     public void viewAdminProfile() {
-        System.out.println("Enter your student id: ");
+        System.out.println("Enter your employee id: ");
         int id = scanner.nextInt();
         Admin adminToGet = null;
         for (Admin admin : adminList) {
@@ -136,47 +140,10 @@ public class School {
             System.out.println("ADDRESS: " + adminToGet.getAddress());
             System.out.println("EMPLOYEE ID: " + adminToGet.getEmployeeId());
         }
+        if (adminToGet == null) {
+            System.out.println("You have entered invalid id !!");
+        }
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setLocation(String address) {
-        this.address = address;
-    }
-
-    public ArrayList<Teacher> getTeacherList() {
-        return teacherList;
-    }
-
-    public void setTeacherList(ArrayList<Teacher> teacherList) {
-        this.teacherList = teacherList;
-    }
-
-    public ArrayList<Student> getStudentList() {
-        return studentList;
-    }
-
-    public ArrayList<Grades> getGradeList() {
-        return gradeList;
-    }
-
-    public void setGradeList(ArrayList<Grades> gradeList) {
-        this.gradeList = gradeList;
-    }
-
-    public void setStudentList(ArrayList<Student> studentList) {
-        this.studentList = studentList;
-    }
 
 }

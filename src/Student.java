@@ -4,10 +4,11 @@ public class Student {
 
     public Scanner scanner = new Scanner(System.in);
 
-    private final String name;
-    private final String address;
-    private final int grade;
-    private final int id;
+    private String name;
+    private String address;
+    private int grade;
+    private int id;
+    private School school;
 
 
     public Student() {
@@ -22,6 +23,14 @@ public class Student {
         this.name = name;
         this.address = address;
         this.grade = grade;
+    }
+
+    Student(School school) {
+        this.school = school;
+    }
+
+    public void viewProfile() {
+        school.viewStudentProfile();
     }
 
     public String getName() {
