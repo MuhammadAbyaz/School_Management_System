@@ -2,27 +2,28 @@ import java.util.Scanner;
 
 public class Student {
 
-    public Scanner scanner =new Scanner(System.in);
+    public Scanner scanner = new Scanner(System.in);
 
-    private String name;
-    private String address;
-    private int grade;
-    private int id;
+    private final String name;
+    private final String address;
+    private final int grade;
+    private final int id;
 
-    public Student(){
+
+    public Student() {
         System.out.println("Enter Student's name: ");
-        String name= scanner.next();
+        String name = scanner.next();
         System.out.println("Enter Student's address: ");
         String address = scanner.next();
         System.out.println("Enter Student's grade: ");
         int grade = scanner.nextInt();
-        id = (int) (Math.random()*100000);
-        System.out.println("Your Student Id is: " + id);
-
+        id = (int) (Math.random() * 100000);
+        System.out.println("Student Id is: " + id);
         this.name = name;
         this.address = address;
         this.grade = grade;
     }
+
     public String getName() {
         return name;
     }
@@ -32,13 +33,6 @@ public class Student {
         return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public int getGrade() {
         return grade;
@@ -48,4 +42,5 @@ public class Student {
     public int getId() {
         return id;
     }
+
 }

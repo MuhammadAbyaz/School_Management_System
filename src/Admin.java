@@ -8,24 +8,11 @@ public class Admin {
     private int employeeId;
     private School school;
 
-
-    public Admin (){
-        System.out.println("Enter admin name: ");
-        String name = scanner.next();
-        System.out.println("Enter admin address: ");
-        String address = scanner.next();
-        employeeId = (int)(Math.random()*100000);
-        System.out.println("Your Employee id is: " + employeeId);
-        this.name = name;
-        this.address = address;
-    }
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
     public int getEmployeeId() {
         return employeeId;
     }
@@ -34,30 +21,48 @@ public class Admin {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Admin() {
+        System.out.println("Enter admin name: ");
+        String name = scanner.next();
+        System.out.println("Enter admin address: ");
+        String address = scanner.next();
+        employeeId = (int) (Math.random() * 100000);
+        System.out.println("Admin\n's employee id is: " + employeeId);
+        this.name = name;
         this.address = address;
     }
 
-
-
-    public School getSchool() {
-        return school;
-    }
-
-    Admin(School school) {
+    public Admin(School school) {
         this.school = school;
     }
 
-    public void addTeacher(Teacher teacher){
-        this.school.addTeacher(teacher);
+
+    public void addTeacher(Teacher teacher) {
+        school.addTeacher(teacher);
     }
-    public void removeTeacher(int teacherId){
-        this.school.removeTeacher();
+
+    public void removeTeacher() {
+        school.removeTeacher();
     }
-    public void addStudent(Student student){
-        this.school.addStudent(student);
+
+    public void addStudent(Student student) {
+        school.addStudent(student);
     }
-    public void removeStudent(int studentId){
-        this.school.removeStudent();
+
+    public void removeStudent() {
+        school.removeStudent();
     }
+
+    public void viewStudentProfile() {
+        school.viewStudentProfile();
+    }
+
+    public void viewTeacherProfile() {
+        school.viewTeacherProfile();
+    }
+
+    public void viewAdminProfile() {
+        school.viewAdminProfile();
+    }
+
 }

@@ -1,17 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
-    public static Scanner sc = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        School school = new School();
-        homeScreen(school);
+        homeScreen();
 
     }
 
-    public static void homeScreen(School school) {
-        int option=0;
-        while (!(option==5)) {
+    public static void homeScreen() {
+        School school = new School();
+        Admin admin = new Admin();
+        int option = 0;
+        while (!(option == 5)) {
             System.out.println("\t\t\t\t ______________________________________");
             System.out.println("\t\t\t\t|                                      |");
             System.out.println("\t\t\t\t|  Welcome to School Management System |");
@@ -25,7 +26,7 @@ public class Main {
             System.out.println("\t\t\t\t     | 5 | Exit              |");
             System.out.println("\t\t\t\t     |___|___________________|");
             try {
-                option = sc.nextInt();
+                option = scanner.nextInt();
                 if (option < 1 || option > 5) {
                     System.out.println("Invalid Input! Please Select from 1 - 5: ");
                 }
@@ -35,11 +36,11 @@ public class Main {
             if (option == 1) {
                 mainMenuForSchool(school);
             } else if (option == 2) {
-                mainMenuForAdmin();
-            } else if (option == 3){
-                mainMenuForTeacher();
+                mainMenuForAdmin(admin, school);
+            } else if (option == 3) {
+                mainMenuForTeacher(school);
             } else if (option == 4) {
-                mainMenuForStudent();
+                mainMenuForStudent(school);
             }
         }
     }
@@ -47,133 +48,159 @@ public class Main {
     public static void mainMenuForSchool(School school) {
         System.out.println("\t\t\t\t      ___________________________");
         System.out.println("\t\t\t\t     |   |                       |");
-        System.out.println("\t\t\t\t     | 1 | Add a Student         |");
-        System.out.println("\t\t\t\t     | 2 | Delete a Student      |");
-        System.out.println("\t\t\t\t     | 3 | Add a Teacher         |");
-        System.out.println("\t\t\t\t     | 4 | Delete a Teacher      |");
+        System.out.println("\t\t\t\t     | 1 | Add a student         |");
+        System.out.println("\t\t\t\t     | 2 | Delete a student      |");
+        System.out.println("\t\t\t\t     | 3 | Add a teacher         |");
+        System.out.println("\t\t\t\t     | 4 | Delete a teacher      |");
         System.out.println("\t\t\t\t     | 5 | Add an admin          |");
         System.out.println("\t\t\t\t     | 6 | Remove an admin       |");
-        System.out.println("\t\t\t\t     | 7 | Back                  |");
+        System.out.println("\t\t\t\t     | 7 | View a student        |");
+        System.out.println("\t\t\t\t     | 8 | View a Teacher        |");
+        System.out.println("\t\t\t\t     | 9 | View an admin         |");
+        System.out.println("\t\t\t\t     | 10| Back                  |");
         System.out.println("\t\t\t\t     |___|_______________________|");
 
         System.out.println("Select from above: ");
         int option = 0;
-        while (!(option ==7)){
+        while (!(option == 10)) {
             try {
-                option = sc.nextInt();
-                if (option < 1 || option > 7) {
-                    System.out.println("Invalid Input! Please Select from 1 - 7: ");
+                option = scanner.nextInt();
+                if (option < 1 || option > 10) {
+                    System.out.println("Invalid Input! Please Select from 1 - 10: ");
                 }
             } catch (Exception e) {
                 System.out.println();
             }
             if (option == 1) {
                 school.addStudent(new Student());
-                option = 7;
+                option = 10;
             } else if (option == 2) {
                 school.removeStudent();
-                option = 7;
+                option = 10;
             } else if (option == 3) {
                 school.addTeacher(new Teacher());
-                option = 7;
+                option = 10;
             } else if (option == 4) {
                 school.removeTeacher();
-                option = 7;
+                option = 10;
             } else if (option == 5) {
                 school.addAdmin(new Admin());
-                option = 7;
+                option = 10;
             } else if (option == 6) {
                 school.removeAdmin();
-                option = 7;
+                option = 10;
+            } else if (option == 7) {
+                school.viewStudentProfile();
+                option = 10;
+            } else if (option == 8) {
+                school.viewTeacherProfile();
+                option = 10;
+            } else if (option == 9) {
+                school.viewAdminProfile();
+                option = 10;
             }
         }
     }
 
-    public static void mainMenuForAdmin() {
+    public static void mainMenuForAdmin(Admin admin, School school) {
         System.out.println("\t\t\t\t      ___________________________");
         System.out.println("\t\t\t\t     |   |                       |");
-        System.out.println("\t\t\t\t     | 1 | Add a Student         |");
-        System.out.println("\t\t\t\t     | 2 | Delete a Student      |");
-        System.out.println("\t\t\t\t     | 3 | Edit a Student        |");
-        System.out.println("\t\t\t\t     | 4 | Add a Teacher         |");
-        System.out.println("\t\t\t\t     | 5 | Delete a Teacher      |");
-        System.out.println("\t\t\t\t     | 6 | Edit a Teacher        |");
-        System.out.println("\t\t\t\t     | 7 | Edit an admin         |");
+        System.out.println("\t\t\t\t     | 1 | Add a student         |");
+        System.out.println("\t\t\t\t     | 2 | Delete a student      |");
+        System.out.println("\t\t\t\t     | 3 | Add a teacher         |");
+        System.out.println("\t\t\t\t     | 4 | Delete a teacher      |");
+        System.out.println("\t\t\t\t     | 5 | View a student        |");
+        System.out.println("\t\t\t\t     | 6 | View a teacher        |");
+        System.out.println("\t\t\t\t     | 7 | View an admin         |");
         System.out.println("\t\t\t\t     | 8 | Back                  |");
         System.out.println("\t\t\t\t     |___|_______________________|");
 
         System.out.println("Select from above: ");
         int option = 0;
-        while (option < 1) {
+        while (!(option == 8)) {
             try {
-                option = sc.nextInt();
+                option = scanner.nextInt();
                 if (option < 1 || option > 8) {
                     System.out.println("Invalid Input! Please Select from 1 - 8: ");
                 }
             } catch (Exception e) {
-                System.out.println();
+                System.out.println(e);
             }
             if (option == 1) {
-                mainMenuForAdmin();
+                admin.addStudent(new Student());
+                option = 8;
             } else if (option == 2) {
-                mainMenuForTeacher();
+                admin.removeStudent();
+                option = 8;
+            } else if (option == 3) {
+                admin.addTeacher(new Teacher());
+                option = 8;
+            } else if (option == 4) {
+                admin.removeTeacher();
+                option = 8;
+            } else if (option == 5) {
+                admin.viewStudentProfile();
+                option = 8;
+            } else if (option == 6) {
+                admin.viewTeacherProfile();
+                option = 8;
+            } else if (option == 7) {
+                admin.viewAdminProfile();
+                option = 8;
             }
         }
     }
 
-    public static void mainMenuForTeacher() {
+
+    public static void mainMenuForTeacher(School school) {
         System.out.println("\t\t\t\t      ___________________________");
         System.out.println("\t\t\t\t     |   |                       |");
         System.out.println("\t\t\t\t     | 1 | View Profile          |");
-        System.out.println("\t\t\t\t     | 2 | Edit Profile          |");
-        System.out.println("\t\t\t\t     | 3 | Edit a Student        |");
-        System.out.println("\t\t\t\t     | 4 | Back                  |");
+        System.out.println("\t\t\t\t     | 2 | Back                  |");
         System.out.println("\t\t\t\t     |___|_______________________|");
 
         System.out.println("Select from above: ");
         int option = 0;
-        while (option < 1) {
+        while (!(option == 2)) {
             try {
-                option = sc.nextInt();
+                option = scanner.nextInt();
                 if (option < 1 || option > 4) {
-                    System.out.println("Invalid Input! Please Select from 1 - 4: ");
+                    System.out.println("Invalid Input! Please Select from 1 - 2: ");
                 }
             } catch (Exception e) {
                 System.out.println();
             }
             if (option == 1) {
-                mainMenuForAdmin();
-            } else if (option == 2) {
-                mainMenuForTeacher();
+                school.viewTeacherProfile();
+                option = 2;
             }
         }
     }
 
-    public static void mainMenuForStudent() {
+    public static void mainMenuForStudent(School school) {
         System.out.println("\t\t\t\t      __________________________");
         System.out.println("\t\t\t\t     |   |                      |");
         System.out.println("\t\t\t\t     | 1 | View Profile         |");
-        System.out.println("\t\t\t\t     | 2 | Edit Profile         |");
-        System.out.println("\t\t\t\t     | 3 | Back                 |");
+        System.out.println("\t\t\t\t     | 2 | Back                 |");
         System.out.println("\t\t\t\t     |___|______________________|");
 
         System.out.println("Select from above: ");
 
         int option = 0;
-        while (option < 1) {
+        while (!(option == 2)) {
             try {
-                option = sc.nextInt();
-                if (option < 1 || option > 3) {
-                    System.out.println("Invalid Input! Please Select from 1 - 3: ");
+                option = scanner.nextInt();
+                if (option < 1 || option > 2) {
+                    System.out.println("Invalid Input! Please Select from 1 - 2: ");
                 }
             } catch (Exception e) {
                 System.out.println();
             }
             if (option == 1) {
-                mainMenuForAdmin();
-            } else if (option == 2) {
-                mainMenuForTeacher();
+                school.viewStudentProfile();
+                option = 2;
             }
         }
     }
 }
+
