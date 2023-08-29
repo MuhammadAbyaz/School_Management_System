@@ -26,11 +26,61 @@ public class Main {
                 scanner.next();
             }
             if (option == 1) {
-                menu.menuForTeacher(admin);
+                menu.menuForTeacher();
+                menuForTeacher(admin);
             } else if (option == 2) {
-                menu.menuForStudent(admin);
+                menu.menuForStudent();
+                menuForStudent(admin);
+            } else if (option == 3) {
+                break;
             }
         }
+    }
+
+    public static void menuForTeacher(Admin admin) {
+        int option;
+        try {
+            option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Please Select from 1 - 5: ");
+            }
+            if (option == 1) {
+                admin.addTeacher();
+            } else if (option == 2) {
+                admin.removeTeacher();
+            } else if (option == 3) {
+                Teacher teacher = admin.getTeacherById();
+                teacher.printTeacher();
+            } else if (option == 4) {
+                admin.editTeacher();
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter a valid number");
+        }
+        homeScreen(admin);
+    }
+
+    public static void menuForStudent(Admin admin) {
+        int option;
+        try {
+            option = scanner.nextInt();
+            if (option < 1 || option > 5) {
+                System.out.println("Please Select from 1 - 5: ");
+            }
+            if (option == 1) {
+                admin.addStudent();
+            } else if (option == 2) {
+                admin.removeStudent();
+            } else if (option == 3) {
+                Student student = admin.getStudentById();
+                student.printStudent();
+            } else if (option == 4) {
+                admin.editStudent();
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter valid number");
+        }
+        homeScreen(admin);
     }
 }
 
