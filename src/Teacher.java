@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class Teacher {
-    private String name;
+    private final String name;
     private int ID = 0;
-    private String address;
+    private final String address;
     private final int employeeId;
-    private ArrayList<String> subjectToTeach;
+    private final ArrayList<String> subjectToTeach;
 
     public Teacher(String _name, String _address) {
         this.name = _name;
@@ -40,18 +40,6 @@ public class Teacher {
 
     public String getAddress() {
         return address;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setSubjectToTeach(ArrayList<String> subjectToTeach) {
-        this.subjectToTeach = subjectToTeach;
     }
 
 }

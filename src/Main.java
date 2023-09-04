@@ -4,11 +4,11 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static Menus menu = new Menus();
 
+
     public static void main(String[] args) {
-        String name = "S.M. Public Academy";
-        String address = "North Nazim-abad";
-        School school = new School(name, address);
-        Admin admin = new Admin(school);
+        Db db = new Db();
+        db.connectToDb();
+        Admin admin = new Admin();
         homeScreen(admin);
     }
 
@@ -27,17 +27,17 @@ public class Main {
             }
             if (option == 1) {
                 menu.menuForTeacher();
-                menuForTeacher(admin);
+                optionForTeacher(admin);
+                return;
             } else if (option == 2) {
                 menu.menuForStudent();
-                menuForStudent(admin);
-            } else if (option == 3) {
-                break;
+                optionForStudent(admin);
+                return;
             }
         }
     }
 
-    public static void menuForTeacher(Admin admin) {
+    public static void optionForTeacher(Admin admin) {
         int option;
         try {
             option = scanner.nextInt();
@@ -49,8 +49,7 @@ public class Main {
             } else if (option == 2) {
                 admin.removeTeacher();
             } else if (option == 3) {
-                Teacher teacher = admin.getTeacherById();
-                teacher.printTeacher();
+                admin.viewTeacher();
             } else if (option == 4) {
                 admin.editTeacher();
             }
@@ -60,7 +59,7 @@ public class Main {
         homeScreen(admin);
     }
 
-    public static void menuForStudent(Admin admin) {
+    public static void optionForStudent(Admin admin) {
         int option;
         try {
             option = scanner.nextInt();
@@ -72,8 +71,7 @@ public class Main {
             } else if (option == 2) {
                 admin.removeStudent();
             } else if (option == 3) {
-                Student student = admin.getStudentById();
-                student.printStudent();
+                admin.viewStudent();
             } else if (option == 4) {
                 admin.editStudent();
             }
