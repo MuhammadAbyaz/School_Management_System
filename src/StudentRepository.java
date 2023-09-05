@@ -35,9 +35,8 @@ public class StudentRepository {
                         " GRADE integer NOT NULL, primary key(id));";
                 statement = db.connectToDb().createStatement();
                 statement.executeUpdate(query);
-                System.out.println("Table created");
             } catch (Exception e) {
-                System.out.println("Error occurred");
+                System.out.println("Some error occurred");
             }
         }
         conn.close();
@@ -65,7 +64,7 @@ public class StudentRepository {
         Connection conn = db.connectToDb();
         Statement statement;
         try {
-            
+
             if (checkingID(id)) {
                 String queryTwo = String.format("DELETE FROM student WHERE ID = %s;", id);
                 statement = db.connectToDb().createStatement();

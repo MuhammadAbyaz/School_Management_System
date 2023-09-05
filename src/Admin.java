@@ -81,20 +81,7 @@ public class Admin {
         String name = scanner.next();
         System.out.println("Enter teacher's address: ");
         String address = scanner.next();
-        System.out.println("How many subjects will he/she teach? ");
-        int numberOfSubjects = scanner.nextInt();
-        if (numberOfSubjects <= 0) {
-            System.out.println("A teacher at least teaches one subject");
-            return;
-        }
-        Teacher teacher = new Teacher(name, address);
-        String subjects;
-        for (int i = 1; i <= numberOfSubjects; i++) {
-            System.out.println("Subject " + i + " :");
-            subjects = scanner.next();
-            teacher.getSubjectToTeach().add(subjects);
-        }
-        teacherRepository.addTeacher(teacher);
+        teacherRepository.addTeacher(new Teacher(name, address));
     }
 
     public void removeTeacher() throws SQLException {
@@ -145,24 +132,38 @@ public class Admin {
                     String query;
                     switch (choice) {
                         case 1 -> {
+                            System.out.println("How many subjects will he/she teach? ");
+                            int numberOfSubjects = scanner.nextInt();
+                            if (numberOfSubjects <= 0) {
+                                System.out.println("A teacher at least teaches one subject");
+                                return;
+                            }
                             System.out.println("Enter subject you want to add: ");
-                            subject = scanner.next();
-                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_APPEND(SUBJECTS, '%s') WHERE ID = %s ;", subject, id);
-                            teacherRepository.updateSubjects(id, query);
+                            for (int i = 1; i <= numberOfSubjects; i++) {
+                                System.out.println("Subject " + i + " : ");
+                                subject = scanner.next();
+                                query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_APPEND(SUBJECTS, '%s') WHERE ID = %s", subject, id);
+                                teacherRepository.updateSubjects(query);
+                                message("teacher");
+                            }
                         }
                         case 2 -> {
                             System.out.println("Enter subject you want to remove: ");
                             subject = scanner.next();
-                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_REMOVE(SUBJECTS, '%s') WHERE ID = %s", subject, id);
-                            teacherRepository.updateSubjects(id, query);
+                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_APPEND(SUBJECTS, '%s') WHERE ID = %s)", subject, id);
+                            teacherRepository.updateSubjects(query);
+                            message("teacher");
                         }
                         case 3 -> {
                             System.out.println("Enter subject you want to replace: ");
-                            String subjectToBeReplaced = scanner.next();
-                            System.out.println("Enter subject you want to replace with: ");
                             subject = scanner.next();
-                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_REPLACE(SUBJECTS, '%s', '%s') WHERE ID = %s", subjectToBeReplaced, subject, id);
-                            teacherRepository.updateSubjects(id, query);
+                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_REMOVE(SUBJECTS, '%s') WHERE ID = %s", subject, id);
+                            teacherRepository.updateSubjects(query);
+                            System.out.println("Enter subject you want to replace with : ");
+                            subject = scanner.next();
+                            query = String.format("UPDATE teacher SET SUBJECTS = ARRAY_APPEND(SUBJECTS, '%s') WHERE ID = %s ;", subject, id);
+                            teacherRepository.updateSubjects(query);
+                            message("teacher");
                         }
                     }
                 }

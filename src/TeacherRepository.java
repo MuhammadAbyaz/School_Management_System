@@ -34,9 +34,8 @@ public class TeacherRepository {
                         ", primary key(id));";
                 statement = db.connectToDb().createStatement();
                 statement.executeQuery(query);
-                System.out.println("Table created");
             } catch (Exception e) {
-                System.out.println("Error occurred");
+                System.out.println("Some error occurred");
             }
         }
         conn.close();
@@ -47,7 +46,7 @@ public class TeacherRepository {
         Statement statement;
         try {
             String query = String.format("INSERT INTO teacher (NAME, ADDRESS, SUBJECTS)\n" +
-                    "VALUES ('%s', '%s',ARRAY ['%s']);", teacher.getName(), teacher.getAddress(), teacher.getSubjectToTeach());
+                    "VALUES ('%s', '%s', ARRAY[]:: varchar[]);", teacher.getName(), teacher.getAddress());
             statement = db.connectToDb().createStatement();
             statement.executeUpdate(query);
             System.out.println(" ____________________________");
@@ -129,16 +128,12 @@ public class TeacherRepository {
         conn.close();
     }
 
-    public void updateSubjects(int id, String query2) throws SQLException {
+    public void updateSubjects(String query) {
         Connection conn = db.connectToDb();
         Statement statement;
         try {
-            String query = String.format("SELECT SUBJECTS FROM teacher WHERE ID = %s", id);
             statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            resultSet.next();
-            System.out.println(resultSet.getArray("SUBJECTS"));
-            statement.executeUpdate(query2);
+            statement.executeUpdate(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
